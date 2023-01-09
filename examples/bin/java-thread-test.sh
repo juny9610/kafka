@@ -21,4 +21,4 @@ if [ "x$KAFKA_HEAP_OPTS" = "x" ]; then
 fi
 nmon -f -s 300 -c 10 -m /home/juny9610/kafka/nmon
 
-exec $base_dir/bin/kafka-run-class.sh kafka.examples.KafkaTopicTest $@
+exec $base_dir/bin/kafka-run-class.sh kafka.examples.KafkaThreadTest $@

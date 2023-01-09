@@ -22,7 +22,7 @@ import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-public class KafkaTopicTest {
+public class KafkaThreadTest {
     public static void main(String[] args) throws InterruptedException {
 
         // 0 = sync, 1 = # of substations, 2 = # of sensors, 3 = records count
@@ -31,8 +31,8 @@ public class KafkaTopicTest {
         boolean isAsync = false;
         int numSubstations = 1;
         int numSensors = 64;
-        int numRecords = 1 * 1000 * 1000 * 32;
-        int numThreads = 1;
+        int numRecords = 1 * 1000 * 250;
+	 	int numThreads = 128;
         // if(args[1] != null)
         //     numSubstations = Integer.parseInt(args[1]);
         // if(args[2] != null)
