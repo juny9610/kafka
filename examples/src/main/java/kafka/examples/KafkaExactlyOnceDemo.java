@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
 package kafka.examples;
 
 import org.apache.kafka.clients.admin.Admin;
@@ -31,7 +32,7 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-
+*/
 /**
  * This exactly once demo driver takes 3 arguments:
  *   - partition: number of partitions for input/output topic
@@ -70,6 +71,7 @@ import java.util.concurrent.TimeUnit;
  * in order to run, otherwise the app could throw
  * {@link org.apache.kafka.common.errors.UnsupportedVersionException}.
  */
+/*
 public class KafkaExactlyOnceDemo {
 
     private static final String INPUT_TOPIC = "input-topic";
@@ -84,14 +86,16 @@ public class KafkaExactlyOnceDemo {
         int numPartitions = Integer.parseInt(args[0]);
         int numInstances = Integer.parseInt(args[1]);
         int numRecords = Integer.parseInt(args[2]);
-
+*/
         /* Stage 1: topic cleanup and recreation */
-        recreateTopics(numPartitions);
+/*
+		recreateTopics(numPartitions);
 
         CountDownLatch prePopulateLatch = new CountDownLatch(1);
-
+*/
         /* Stage 2: pre-populate records */
-        Producer producerThread = new Producer(INPUT_TOPIC, false, null, true, numRecords, -1, prePopulateLatch);
+/*
+		Producer producerThread = new Producer(INPUT_TOPIC, false, null, true, numRecords, -1, prePopulateLatch);
         producerThread.start();
 
         if (!prePopulateLatch.await(5, TimeUnit.MINUTES)) {
@@ -99,9 +103,10 @@ public class KafkaExactlyOnceDemo {
         }
 
         CountDownLatch transactionalCopyLatch = new CountDownLatch(numInstances);
-
+*/
         /* Stage 3: transactionally process all messages */
-        for (int instanceIdx = 0; instanceIdx < numInstances; instanceIdx++) {
+/*
+		for (int instanceIdx = 0; instanceIdx < numInstances; instanceIdx++) {
             ExactlyOnceMessageProcessor messageProcessor = new ExactlyOnceMessageProcessor(
                 INPUT_TOPIC, OUTPUT_TOPIC, instanceIdx, transactionalCopyLatch);
             messageProcessor.start();
@@ -112,9 +117,10 @@ public class KafkaExactlyOnceDemo {
         }
 
         CountDownLatch consumeLatch = new CountDownLatch(1);
-
+*/
         /* Stage 4: consume all processed messages to verify exactly once */
-        Consumer consumerThread = new Consumer(OUTPUT_TOPIC, "Verify-consumer", Optional.empty(), true, numRecords, consumeLatch);
+/*
+		Consumer consumerThread = new Consumer(OUTPUT_TOPIC, "Verify-consumer", Optional.empty(), true, numRecords, consumeLatch);
         consumerThread.start();
 
         if (!consumeLatch.await(5, TimeUnit.MINUTES)) {
@@ -193,3 +199,4 @@ public class KafkaExactlyOnceDemo {
         System.out.println("Deleted old topics: " + topicsToDelete);
     }
 }
+*/

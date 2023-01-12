@@ -18,7 +18,7 @@ package kafka.examples;
 
 public class KafkaProperties {
     public static final String TOPIC = "topic1";
-    public static final String KAFKA_SERVER_URL = "localhost";
+    public static final String KAFKA_SERVER_URL = "166.104.110.11";
     public static final int KAFKA_SERVER_PORT = 9092;
 
     private KafkaProperties() {}

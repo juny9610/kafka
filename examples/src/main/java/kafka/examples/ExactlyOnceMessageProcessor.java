@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
 package kafka.examples;
 
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
@@ -37,11 +38,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
-
+*/
 /**
  * A demo class for how to write a customized EOS app. It takes a consume-process-produce loop.
  * Important configurations and APIs are commented.
  */
+/*
 public class ExactlyOnceMessageProcessor extends Thread {
 
     private static final boolean READ_COMMITTED = true;
@@ -66,7 +68,7 @@ public class ExactlyOnceMessageProcessor extends Thread {
         // It is recommended to have a relatively short txn timeout in order to clear pending offsets faster.
         final int transactionTimeoutMs = 10000;
         // A unique transactional.id must be provided in order to properly use EOS.
-        producer = new Producer(outputTopic, true, transactionalId, true, -1, transactionTimeoutMs, null).get();
+//        producer = new Producer(outputTopic, true, transactionalId, true, -1, transactionTimeoutMs, null).get();
         // Consumer must be in read_committed mode, which means it won't be able to read uncommitted data.
         // Consumer could optionally configure groupInstanceId to avoid unnecessary rebalances.
         this.groupInstanceId = "Txn-consumer-" + instanceIdx;
@@ -185,3 +187,4 @@ public class ExactlyOnceMessageProcessor extends Thread {
         });
     }
 }
+*/

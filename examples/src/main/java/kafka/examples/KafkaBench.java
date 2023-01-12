@@ -47,8 +47,8 @@ public class KafkaBench {
 
         Producer producerThread[] = new Producer[numThreads];
         for (int i = 0; i < numThreads; i++) {
-            producerThread[i] = new Producer("KafkaBench-10gb", isAsync, transactionalID, enableIdempotency, 
-                                              numRecords, transactionTimeoutMs, latch);
+//            producerThread[i] = new Producer("KafkaBench-10gb", isAsync, transactionalID, enableIdempotency, 
+//                                              numRecords, transactionTimeoutMs, latch);
         }
 
         for (int i = 0; i < numThreads; i++) {

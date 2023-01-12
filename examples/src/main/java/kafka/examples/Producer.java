@@ -31,11 +31,12 @@ import java.util.concurrent.ExecutionException;
 //import org.apache.commons.lang3.RandomStringUtils;
 
 public class Producer extends Thread {
-    private final KafkaProducer<Integer, String> producer;
+    private final KafkaProducer<String, String> producer;
     private final String topic;
     private final Boolean isAsync;
     private int numRecords;
     private final CountDownLatch latch;
+	private final String producerID;
 
     public Producer(final String topic,
                     final Boolean isAsync,
@@ -43,10 +44,11 @@ public class Producer extends Thread {
                     final boolean enableIdempotency,
                     final int numRecords,
                     final int transactionTimeoutMs,
-                    final CountDownLatch latch) {
+                    final CountDownLatch latch,
+					final String producerID) {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_SERVER_URL + ":" + KafkaProperties.KAFKA_SERVER_PORT);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaProducer-"+topic);
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, "KafkaProducer-" + producerID + topic);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         if (transactionTimeoutMs > 0) {
@@ -62,9 +64,10 @@ public class Producer extends Thread {
         this.isAsync = isAsync;
         this.numRecords = numRecords;
         this.latch = latch;
+		this.producerID = producerID;
     }
 
-    KafkaProducer<Integer, String> get() {
+    KafkaProducer<String, String> get() {
         return producer;
     }
 
@@ -87,26 +90,29 @@ public class Producer extends Thread {
         while (recordsSent < numRecords) {
             //String messageStr = "Message_" + messageKey;
             long startTime = System.currentTimeMillis();
-            if (isAsync) { // Send asynchronously
+			String msgKey = producerID + Integer.toString(messageKey);
+			/*
+			if (isAsync) { // Send asynchronously
                 producer.send(new ProducerRecord<>(topic,
-                    messageKey,
-                    messageStr), new DemoCallBack(startTime, messageKey, messageStr));
+                    msgKey,
+                    messageStr), new DemoCallBack(startTime, msgKey, messageStr));
             } else { // Send synchronously
                 try {
                     producer.send(new ProducerRecord<>(topic,
-                        messageKey,
+                        msgKey,
                         messageStr)).get();
-                    //System.out.println("Sent message: (" + messageKey + ", " + messageStr + ")");
+                    //System.out.println("Sent message: (" + msgKey + ", " + messageStr + ")");
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
             }
+			*/
             messageKey += 2;
             recordsSent += 1;
         }
         System.out.println("==> Producer sent " + numRecords + " records successfully");
         long measureEnd = System.currentTimeMillis();
-        System.out.println("==> Elapsed Time is " + (measureEnd - measureStart) + "ms");
+        System.out.println("==> Producer Elapsed Time is " + (measureEnd - measureStart) + "ms");
         latch.countDown();
     }
 }

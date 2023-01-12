@@ -47,8 +47,8 @@ public class KafkaTopicTest {
 
         Producer producerThread[] = new Producer[numThreads];
         for (int i = 0; i < numThreads; i++) {
-            producerThread[i] = new Producer("KafkaTopic-thread-test", isAsync, transactionalID, enableIdempotency, 
-                                              numRecords, transactionTimeoutMs, latch);
+//            producerThread[i] = new Producer("KafkaTopic-thread-test", isAsync, transactionalID, enableIdempotency, 
+//                                              numRecords, transactionTimeoutMs, latch);
         }
 
         for (int i = 0; i < numThreads; i++) {
